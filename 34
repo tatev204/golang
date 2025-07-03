@@ -1,0 +1,25 @@
+package main
+
+import "fmt"
+
+func sum(a int, b int, c int, d int) bool {
+	if a+b == c+d {
+		return true
+	}
+	if a+c == b+d {
+		return true
+	}
+	if a+d == b+c {
+		return true
+	} else {
+		return false
+	}
+}
+
+func main() {
+	a := 10
+	b := -15
+	c := 2
+	d := -155
+	fmt.Println(sum(a, b, c, d))
+}
