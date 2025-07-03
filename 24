@@ -1,0 +1,23 @@
+package main
+
+import "fmt"
+
+func check(a, b, c int) bool {
+	if a == 2 && b == 2 && c != 2 {
+		return true
+	}
+	if a == 2 && c == 2 && b != 2 {
+		return true
+	}
+	if b == 2 && c == 2 && a != 2 {
+		return true
+	}
+	return false
+}
+func main() {
+	a := 2
+	b := 2
+	c := 3
+	fmt.Println(check(a, b, c))
+
+}
