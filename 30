@@ -1,0 +1,32 @@
+package main
+
+import "fmt"
+
+func printDescending(a, b, c int) {
+	if a > b && a > c {
+		if b > c {
+			fmt.Println(a, b, c)
+		} else {
+			fmt.Println(a, c, b)
+		}
+	} else if b > a && b > c {
+		if a > c {
+			fmt.Println(b, a, c)
+		} else {
+			fmt.Println(b, c, a)
+		}
+	} else {
+		if a > b {
+			fmt.Println(c, a, b)
+		} else {
+			fmt.Println(c, b, a)
+		}
+	}
+}
+func main() {
+	a := 2
+	b := 4
+	c := 8
+	printDescending(a, b, c)
+
+}
