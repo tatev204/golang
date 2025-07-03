@@ -1,0 +1,25 @@
+package main
+
+import "fmt"
+
+func min(abc int) int {
+	a := abc / 100
+	b := (abc / 10) % 10
+	c := abc % 10
+
+	min := a
+	if b < min {
+		min = b
+	}
+	if c < min {
+		min = c
+	}
+	return min
+}
+func main() {
+	a := 4
+	b := 3
+	c := 7
+	abc := a*100 + b*10 + c
+	fmt.Println(min(abc))
+}
