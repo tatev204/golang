@@ -1,0 +1,25 @@
+package main
+
+import "fmt"
+
+func minnumber(a int, b int, c int, d int) int {
+	min := a
+	if b < min {
+		min = b
+	}
+	if c < min {
+		min = c
+	}
+	if d < min {
+		min = d
+	}
+	return min
+}
+
+func main() {
+	a := 10
+	b := -15
+	c := 2
+	d := -155
+	fmt.Println(minnumber(a, b, c, d))
+}
