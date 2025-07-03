@@ -1,0 +1,14 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	nums := []int{2, 4, 6, 8}
+	
+	//սորտավորման գրելու ձևը նայել եմ
+	sort.Sort(sort.Reverse(sort.IntSlice(nums)))
+	fmt.Println(nums)
+}
