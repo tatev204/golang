@@ -1,0 +1,30 @@
+package main
+
+import "fmt"
+
+func main() {
+	a := 2
+	b := 2
+	c := 3
+	d := 12
+	count := 0
+
+	if a%2 != 0 {
+		count++
+	}
+	if b%2 != 0 {
+		count++
+	}
+	if c%2 != 0 {
+		count++
+	}
+	if d%2 != 0 {
+		count++
+	}
+
+	if count >= 2 {
+		fmt.Println(1)
+	} else {
+		fmt.Println(2)
+	}
+}
