@@ -1,0 +1,25 @@
+package main
+
+import "fmt"
+
+func onezero(abcd int) int {
+	a := abcd / 1000
+	b := (abcd / 100) % 10
+	c := (abcd / 10) % 10
+	d := abcd % 10
+
+	if a+b+c+d > 20 {
+		return 1
+	}
+	return 0
+}
+func main() {
+	a := 7
+	b := 7
+	c := 7
+	d := 6
+	abcd := a*1000 + b*100 + c*10 + d
+	y := onezero(abcd)
+
+	fmt.Println(y)
+}
