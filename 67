@@ -1,0 +1,24 @@
+package main
+
+import "fmt"
+
+func yesno(abcd int) string {
+	a := abcd / 1000
+	b := (abcd / 100) % 10
+	c := (abcd / 10) % 10
+	d := abcd % 10
+
+	if abcd == (a+b+c+d)*(a+b+c+d) {
+		return "YES"
+	}
+	return "NO"
+}
+func main() {
+	a := 2
+	b := 8
+	c := 9
+	d := 1
+	abcd := a*1000 + b*100 + c*10 + d
+
+	fmt.Println(yesno(abcd))
+}
