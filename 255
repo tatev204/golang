@@ -18,13 +18,21 @@ func main() {
 	sum := 0
 	max := arr[0]
 	maxindex := 0
+	count := 1
 	for i := 1; i < n; i++ {
 		if arr[i] > max {
 			max = arr[i]
+			count = 1
 			maxindex = i
+		} else if arr[i] == max {
+			count++
 		}
-
 	}
 	sum = max + maxindex
-	fmt.Println("sum:", sum)
+	if count == 1 {
+		fmt.Println("sum", sum)
+	} else {
+		fmt.Println("max is not unique")
+	}
 }
+
