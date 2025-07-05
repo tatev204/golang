@@ -1,0 +1,34 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var n int
+	var a int
+	var b int
+	fmt.Print("enter n:")
+	fmt.Scan(&n)
+	fmt.Print("enter a:")
+	fmt.Scan(&a)
+	fmt.Print("enter b:")
+	fmt.Scan(&b)
+
+	arr := make([]int, n)
+
+	count := 0
+
+	for i := 0; i < n; i++ {
+		fmt.Scan(&arr[i])
+		if arr[i] > a && arr[i] < b {
+			count++
+
+		}
+	}
+	if count == 0 {
+		fmt.Println("No  numbers ")
+	} else {
+		fmt.Println("count", count)
+	}
+}
