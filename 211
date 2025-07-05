@@ -1,0 +1,22 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var n int
+	fmt.Print("enter n:")
+	fmt.Scan(&n)
+
+	arr := make([]int, n)
+	sum := 0
+	
+	for i := 0; i < n; i++ {
+		fmt.Scan(&arr[i])
+		sum += arr[i]
+	}
+	average := float64(sum) / float64(n)
+	fmt.Println("average", average)
+
+}
