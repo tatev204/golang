@@ -28,7 +28,7 @@ func main() {
 	fmt.Println("enter Y array:")
 	for i := 0; i < n; i++ {
 		fmt.Scan(&Y[i])
-		if Y[i] > 0 {
+		if Y[i] != 0 {
 			product *= Y[i]
 			count++
 		}
