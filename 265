@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var n int
+
+	fmt.Print("enter n: ")
+	fmt.Scan(&n)
+
+	X := make([]int, n)
+	Y := make([]int, n)
+
+	count := 0
+	sum := 0
+	product := 1
+	var result float64
+	fmt.Println("enter X array:")
+	for i := 0; i < n; i++ {
+		fmt.Scan(&X[i])
+		sum += X[i]
+		count++
+
+	}
+
+	fmt.Println("enter Y array:")
+	for i := 0; i < n; i++ {
+		fmt.Scan(&Y[i])
+		if Y[i] > 0 {
+			product *= Y[i]
+			count++
+		}
+	}
+
+	if count == 0 {
+		fmt.Println("no number")
+	} else {
+		result = float64(sum) / float64(product)
+		fmt.Println("result", result)
+
+	}
+}
