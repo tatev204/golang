@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var n int
+
+	fmt.Print("enter n: ")
+	fmt.Scan(&n)
+
+	X := make([]int, n)
+	Y := make([]int, n)
+	sum := 0
+	sumx := 0
+	sumy := 0
+	countx := 0
+	county := 0
+	count := 0
+
+	fmt.Println("enter X array:")
+	for i := 0; i < n; i++ {
+		fmt.Scan(&X[i])
+		sumx += X[i]
+		countx++
+	}
+
+	fmt.Println("enter Y array:")
+	for i := 0; i < n; i++ {
+		fmt.Scan(&Y[i])
+		sumy += Y[i]
+		county++
+	}
+
+	sum = sumx + sumy
+	count = countx + county
+
+	if count == 0 {
+		fmt.Println("no number")
+	} else {
+		average := float64(sum) / float64(count)
+		fmt.Println("average", average)
+	}
+}
