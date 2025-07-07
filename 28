@@ -1,0 +1,19 @@
+package main
+
+import "fmt"
+
+func geopro(a, b, c int) bool {
+	if a == 0 || b == 0 {
+		return false
+	if b/a == c/b {
+		return true
+	}
+	return false
+}
+func main() {
+	a := 2
+	b := 4
+	c := 8
+	fmt.Println(geopro(a, b, c))
+
+}

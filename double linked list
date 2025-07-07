@@ -1,0 +1,31 @@
+package main
+
+import "fmt"
+
+type Node struct {
+	value int
+	next  *Node
+	prior *Node
+}
+
+func main() {
+
+	root := &Node{value: 1, next: nil, prior: nil}
+	root.next = &Node{value: 2, next: nil, prior: root}
+	root.next.next = &Node{value: 3, prior: root.next}
+	tail := root.next.next
+
+	fmt.Println("move forward")
+	current := root
+	for current != nil {
+		fmt.Println(current.value)
+		current = current.next
+	}
+	fmt.Println("move back")
+	current = tail
+	for current != nil {
+		fmt.Println(current.value)
+		current = current.prior
+	}
+
+}

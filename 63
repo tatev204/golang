@@ -1,0 +1,24 @@
+package main
+
+import "fmt"
+
+func onesearch(abcd int) int {
+	a := abcd / 1000
+	b := (abcd / 100) % 10
+	c := (abcd / 10) % 10
+	d := abcd % 10
+
+	if a == 1 || b == 1 || c == 1 || d == 1 {
+		return 1
+	}
+	return 0
+}
+func main() {
+	a := 7
+	b := 6
+	c := 4
+	d := 4
+	abcd := a*1000 + b*100 + c*10 + d
+
+	fmt.Println(onesearch(abcd))
+}

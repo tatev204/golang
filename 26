@@ -1,0 +1,23 @@
+package main
+
+import "fmt"
+
+func couple(a, b, c int) int {
+	if a%2 == 0 && b%2 != 0 && c%2 != 0 {
+		return 1
+	}
+	if b%2 == 0 && a%2 != 0 && c%2 != 0 {
+		return 1
+	}
+	if c%2 == 0 && b%2 != 0 && a%2 != 0 {
+		return 1
+	}
+	return 2
+}
+func main() {
+	a := 2
+	b := 2
+	c := 3
+	fmt.Println(couple(a, b, c))
+
+}

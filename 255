@@ -1,0 +1,38 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var n int
+
+	fmt.Print("enter n: ")
+	fmt.Scan(&n)
+
+	arr := make([]int, n)
+
+	for i := 0; i < n; i++ {
+		fmt.Scan(&arr[i])
+	}
+	sum := 0
+	max := arr[0]
+	maxindex := 0
+	count := 1
+	for i := 1; i < n; i++ {
+		if arr[i] > max {
+			max = arr[i]
+			count = 1
+			maxindex = i
+		} else if arr[i] == max {
+			count++
+		}
+	}
+	sum = max + maxindex
+	if count == 1 {
+		fmt.Println("sum", sum)
+	} else {
+		fmt.Println("max is not unique")
+	}
+}
+

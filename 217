@@ -1,0 +1,28 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	var n int
+	fmt.Print("enter n:")
+	fmt.Scan(&n)
+
+	arr := make([]int, n)
+	product := 1
+	odd := false
+
+	for i := 0; i < n; i ++ {
+		fmt.Scan(&arr[i])
+		if arr[i]%2 != 0 {
+			product *= arr[i] * arr[i]
+			odd = true
+		}
+	}
+	if odd == true {
+		fmt.Println("product ", product)
+	} else {
+		fmt.Println("No odd numbers ")
+	}
+}
