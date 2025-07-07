@@ -1,0 +1,20 @@
+package main
+
+import "fmt"
+
+func main() {
+
+	type Node struct {
+		value int
+		next  *Node
+	}
+
+	root := &Node{value: 1, next: nil}
+	root.next = &Node{value: 2, next: nil}
+
+	current := root
+	for current != nil {
+		fmt.Println(current.value)
+		current = current.next
+	}
+}
