@@ -2,19 +2,32 @@ package main
 
 import "fmt"
 
-func main() {
+type Node struct {
+	value int
+	next  *Node
+}
+type LinkedList struct {
+	root *Node
+}
 
-	type Node struct {
-		value int
-		next  *Node
+func (ll *LinkedList) insertList(val int) {
+	if ll.root == nil {
+		ll.root = &Node{value: val}
+		fmt.Println(ll.root.value)
+		return
+
 	}
-
-	root := &Node{value: 1, next: nil}
-	root.next = &Node{value: 2, next: nil}
-
-	current := root
-	for current != nil {
-		fmt.Println(current.value)
+	current := ll.root
+	for current.next != nil {
 		current = current.next
 	}
+
+	current.next = &Node{value: val}
+	fmt.Println(current.next.value)
+}
+func main() {
+	ll := LinkedList{}
+	ll.insertList(1)
+	ll.insertList(2)
+
 }
