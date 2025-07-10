@@ -1,31 +1,113 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	value int
 	next  *Node
 	prior *Node
 }
+type DoubleLinkedList struct {
+	root *Node
+	tail *Node
+}
 
-func main() {
+func (dll *DoubleLinkedList) insertList(val int) {
+	if dll.root == nil {
+		dll.root = &Node{value: val}
+		dll.tail = dll.root
+		fmt.Println(dll.root.value)
+		return
 
-	root := &Node{value: 1, next: nil, prior: nil}
-	root.next = &Node{value: 2, next: nil, prior: root}
-	root.next.next = &Node{value: 3, prior: root.next}
-	tail := root.next.next
+	}
+	current := dll.root
+	for current.next != nil {
+		current = current.next
+	}
 
-	fmt.Println("move forward")
-	current := root
+	current.next = &Node{value: val}
+	current.next.prior = current
+	dll.tail = current.next
+	fmt.Println(current.next.value)
+}
+
+func (dll *DoubleLinkedList) PrintListMoveForward() {
+	current := dll.root
 	for current != nil {
 		fmt.Println(current.value)
 		current = current.next
 	}
-	fmt.Println("move back")
-	current = tail
+}
+func (dll *DoubleLinkedList) PrintListMoveBack() {
+	current := dll.tail
 	for current != nil {
 		fmt.Println(current.value)
 		current = current.prior
 	}
+
+}
+func (dll *DoubleLinkedList) CountofNodes() int {
+	count := 0
+	current := dll.root
+	for current != nil {
+		count++
+		current = current.next
+	}
+	return count
+}
+
+func (dll *DoubleLinkedList) NegativeElementsbool() bool {
+	current := dll.root
+
+	for current != nil {
+		if current.value < 0 {
+			return true
+		}
+
+		current = current.next
+	}
+	return false
+}
+
+func (dll *DoubleLinkedList) SumNodes() int {
+	sum := 0
+	current := dll.root
+	for current != nil {
+		sum += current.value
+		current = current.next
+	}
+	return sum
+}
+func (dll *DoubleLinkedList) SumOddIndexes() int {
+	sumodd := 0
+	index := 0
+	current := dll.root
+
+	for current != nil {
+		if index%2 != 0 {
+			sumodd += current.value
+		}
+		index++
+		current = current.next
+	}
+	return sumodd
+}
+
+func main() {
+	dll := DoubleLinkedList{}
+	dll.insertList(1)
+	dll.insertList(2)
+
+	fmt.Println("\nlist forward")
+	dll.PrintListMoveForward()
+	fmt.Println("\nlist backward")
+	dll.PrintListMoveBack()
+
+	fmt.Println("count of nodes՝", dll.CountofNodes())
+	fmt.Println("negativ element՝", dll.NegativeElementsbool())
+	fmt.Println("sum of nodes՝", dll.SumNodes())
+	fmt.Println("sum odd index՝", dll.SumOddIndexes())
 
 }
