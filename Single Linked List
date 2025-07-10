@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	value int
@@ -25,9 +27,62 @@ func (ll *LinkedList) insertList(val int) {
 	current.next = &Node{value: val}
 	fmt.Println(current.next.value)
 }
+
+func (ll *LinkedList) CountofNodes() int {
+	count := 0
+	current := ll.root
+	for current != nil {
+		count++
+		current = current.next
+	}
+	return count
+}
+
+func (ll *LinkedList) NegativeElementsbool() bool {
+	current := ll.root
+
+	for current != nil {
+		if current.value < 0 {
+			return true
+		}
+
+		current = current.next
+	}
+	return false
+}
+
+func (ll *LinkedList) SumNodes() int {
+	sum := 0
+	current := ll.root
+	for current != nil {
+		sum += current.value
+		current = current.next
+	}
+	return sum
+}
+func (ll *LinkedList) SumOddIndexes() int {
+	sumodd := 0
+	index := 0
+	current := ll.root
+
+	for current != nil {
+		if index%2 != 0 {
+			sumodd += current.value
+		}
+		index++
+		current = current.next
+	}
+	return sumodd
+}
+
 func main() {
 	ll := LinkedList{}
 	ll.insertList(1)
 	ll.insertList(2)
+
+	fmt.Println("count of nodes՝", ll.CountofNodes())
+	fmt.Println("negativ element՝", ll.NegativeElementsbool())
+	fmt.Println("sum of nodes՝", ll.SumNodes())
+	fmt.Println("sum odd index՝", ll.SumOddIndexes())
 
 }
