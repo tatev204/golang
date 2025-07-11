@@ -70,14 +70,13 @@ func (ll *LinkedList) SumNodes() int {
 }
 func (ll *LinkedList) SumOddIndexes() int {
 	sumodd := 0
-	index := 0
+	count := ll.CountofNodes()
 	current := ll.root
 
-	for current != nil {
-		if index%2 != 0 {
+	for i := 1; i <= count; i += 2 {
+		if current != nil {
 			sumodd += current.value
 		}
-		index++
 		current = current.next
 	}
 	return sumodd
