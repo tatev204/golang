@@ -1,20 +1,88 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func main() {
+type Node struct {
+	value int
+	next  *Node
+}
+type LinkedList struct {
+	root *Node
+}
 
-	type Node struct {
-		value int
-		next  *Node
+func (ll *LinkedList) insertList(val int) {
+	if ll.root == nil {
+		ll.root = &Node{value: val}
+		fmt.Println(ll.root.value)
+		return
+
 	}
-
-	root := &Node{value: 1, next: nil}
-	root.next = &Node{value: 2, next: nil}
-
-	current := root
-	for current != nil {
-		fmt.Println(current.value)
+	current := ll.root
+	for current.next != nil {
 		current = current.next
 	}
+
+	current.next = &Node{value: val}
+	fmt.Println(current.next.value)
+}
+
+func (ll *LinkedList) CountofNodes() int {
+	count := 0
+	current := ll.root
+	for current != nil {
+		count++
+		current = current.next
+	}
+	return count
+}
+
+func (ll *LinkedList) NegativeElementsbool() bool {
+	current := ll.root
+
+	for current != nil {
+		if current.value < 0 {
+			return true
+		}
+
+		current = current.next
+	}
+	return false
+}
+
+func (ll *LinkedList) SumNodes() int {
+	sum := 0
+	current := ll.root
+	for current != nil {
+		sum += current.value
+		current = current.next
+	}
+	return sum
+}
+func (ll *LinkedList) SumOddIndexes() int {
+	sumodd := 0
+	index := 0
+	current := ll.root
+
+	for current != nil {
+		if index%2 != 0 {
+			sumodd += current.value
+		}
+		index++
+		current = current.next
+	}
+	return sumodd
+}
+
+func main() {
+	ll := LinkedList{}
+	ll.insertList(1)
+	ll.insertList(2)
+
+	fmt.Println("count of nodes՝", ll.CountofNodes())
+	fmt.Println("negativ element՝", ll.NegativeElementsbool())
+	fmt.Println("sum of nodes՝", ll.SumNodes())
+	fmt.Println("sum odd index՝", ll.SumOddIndexes())
+
 }
