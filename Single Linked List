@@ -4,6 +4,14 @@ import (
 	"fmt"
 )
 
+type LL interface {
+	insertList(val int)
+	CountofNodes() int
+	NegativeElementsbool() bool
+	SumNodes() int
+	SumOddIndexes() int
+}
+
 type Node struct {
 	value int
 	next  *Node
@@ -76,13 +84,14 @@ func (ll *LinkedList) SumOddIndexes() int {
 }
 
 func main() {
-	ll := LinkedList{}
-	ll.insertList(1)
-	ll.insertList(2)
+	var LinkedL LL = &LinkedList{}
 
-	fmt.Println("count of nodes՝", ll.CountofNodes())
-	fmt.Println("negativ element՝", ll.NegativeElementsbool())
-	fmt.Println("sum of nodes՝", ll.SumNodes())
-	fmt.Println("sum odd index՝", ll.SumOddIndexes())
+	LinkedL.insertList(1)
+	LinkedL.insertList(2)
+
+	fmt.Println("count of nodes՝", LinkedL.CountofNodes())
+	fmt.Println("negativ element՝", LinkedL.NegativeElementsbool())
+	fmt.Println("sum of nodes՝", LinkedL.SumNodes())
+	fmt.Println("sum odd index՝", LinkedL.SumOddIndexes())
 
 }

@@ -4,6 +4,15 @@ import (
 	"fmt"
 )
 
+type DLL interface {
+	insertList(val int)
+	PrintListMoveForward()
+	PrintListMoveBack()
+	CountofNodes() int
+	NegativeElementsbool() bool
+	SumNodes() int
+	SumOddIndexes() int
+}
 type Node struct {
 	value int
 	next  *Node
@@ -96,18 +105,19 @@ func (dll *DoubleLinkedList) SumOddIndexes() int {
 }
 
 func main() {
-	dll := DoubleLinkedList{}
-	dll.insertList(1)
-	dll.insertList(2)
+	var DoubleLinkedl DLL = &DoubleLinkedList{}
+
+	DoubleLinkedl.insertList(1)
+	DoubleLinkedl.insertList(2)
 
 	fmt.Println("\nlist forward")
-	dll.PrintListMoveForward()
+	DoubleLinkedl.PrintListMoveForward()
 	fmt.Println("\nlist backward")
-	dll.PrintListMoveBack()
+	DoubleLinkedl.PrintListMoveBack()
 
-	fmt.Println("count of nodes՝", dll.CountofNodes())
-	fmt.Println("negativ element՝", dll.NegativeElementsbool())
-	fmt.Println("sum of nodes՝", dll.SumNodes())
-	fmt.Println("sum odd index՝", dll.SumOddIndexes())
+	fmt.Println("count of nodes՝", DoubleLinkedl.CountofNodes())
+	fmt.Println("negativ element՝", DoubleLinkedl.NegativeElementsbool())
+	fmt.Println("sum of nodes՝", DoubleLinkedl.SumNodes())
+	fmt.Println("sum odd index՝", DoubleLinkedl.SumOddIndexes())
 
 }
