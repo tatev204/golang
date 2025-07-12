@@ -5,11 +5,12 @@ import (
 )
 
 type LL interface {
-	insertList(val int)
+	insert(val int)
 	CountofNodes() int
 	NegativeElementsbool() bool
 	SumNodes() int
 	SumOddIndexes() int
+	PrintList()
 }
 
 type Node struct {
@@ -20,22 +21,25 @@ type LinkedList struct {
 	root *Node
 }
 
-func (ll *LinkedList) insertList(val int) {
+func (ll *LinkedList) insert(val int) {
+	node := &Node{value: val}
 	if ll.root == nil {
-		ll.root = &Node{value: val}
-		fmt.Println(ll.root.value)
-		return
-
+		ll.root = node
+	} else {
+		current := ll.root
+		if current.next != nil {
+			current = current.next
+		}
+		current.next = node
 	}
+}
+func (ll *LinkedList) PrintList() {
 	current := ll.root
-	for current.next != nil {
+	for current != nil {
+		fmt.Println(current.value)
 		current = current.next
 	}
-
-	current.next = &Node{value: val}
-	fmt.Println(current.next.value)
 }
-
 func (ll *LinkedList) CountofNodes() int {
 	count := 0
 	current := ll.root
@@ -85,8 +89,11 @@ func (ll *LinkedList) SumOddIndexes() int {
 func main() {
 	var LinkedL LL = &LinkedList{}
 
-	LinkedL.insertList(1)
-	LinkedL.insertList(2)
+	LinkedL.insert(1)
+	LinkedL.insert(2)
+
+	fmt.Println("\nlist ")
+	LinkedL.PrintList()
 
 	fmt.Println("count of nodes՝", LinkedL.CountofNodes())
 	fmt.Println("negativ element՝", LinkedL.NegativeElementsbool())
