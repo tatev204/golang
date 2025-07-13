@@ -12,29 +12,27 @@ type CLL interface {
 	SumNodes() int
 	SumOddIndexes() int
 }
+
 type Node struct {
 	value int
 	next  *Node
 }
-
 type CLinkedList struct {
 	root *Node
-	tail *Node
 }
 
 func (cll *CLinkedList) insert(val int) {
 	node := &Node{value: val}
 	if cll.root == nil {
 		cll.root = node
-		cll.tail = node
-		cll.tail.next = cll.root
+		cll.root.next = node
+		cll.root.next.next = cll.root
 	} else {
-		cll.tail.next = node
-		cll.tail = node
-		cll.tail.next = cll.root
+		cll.root.next.next = node
+		cll.root.next = node
+		cll.root.next.next = cll.root
 	}
 }
-
 func (cll *CLinkedList) PrintList() {
 
 	current := cll.root
@@ -47,7 +45,6 @@ func (cll *CLinkedList) PrintList() {
 	}
 
 }
-
 func (cll *CLinkedList) CountofNodes() int {
 	count := 0
 	current := cll.root
@@ -92,7 +89,6 @@ func (cll *CLinkedList) SumNodes() int {
 	}
 	return sum
 }
-
 func (cll *CLinkedList) SumOddIndexes() int {
 	sumodd := 0
 	count := cll.CountofNodes()
