@@ -1,0 +1,87 @@
+package main
+
+import "fmt"
+
+type BSTree interface {
+	insert(val int)
+	PrintTree()
+}
+type Node struct {
+	right *Node
+	left  *Node
+	value int
+}
+
+type BinarySearchTree struct {
+	root *Node
+}
+
+func (bst *BinarySearchTree) insert(val int) {
+	node := &Node{value: val}
+
+	if bst.root == nil {
+		bst.root = node
+		return
+	}
+	current := bst.root
+	for {
+		if val < current.value {
+			if current.left == nil {
+				current.left = node
+				return
+
+			}
+			current = current.left
+
+		} else {
+			if current.right == nil {
+				current.right = node
+				return
+			}
+			current = current.right
+		}
+	}
+}
+func (bst *BinarySearchTree) PrintTree() {
+	root := bst.root
+	if root == nil {
+		fmt.Println("tree is empty")
+		return
+	}
+	fmt.Println("root", root.value)
+
+	if root.left != nil {
+		fmt.Println("left", root.left.value)
+
+		if root.left.left != nil {
+			fmt.Println("left.left", root.left.left.value)
+		}
+		if root.left.right != nil {
+			fmt.Println("left.right", root.left.right.value)
+		}
+	}
+	if root.right != nil {
+		fmt.Println("right", root.right.value)
+
+		if root.right.left != nil {
+			fmt.Println("right.left", root.right.left.value)
+		}
+		if root.right.right != nil {
+			fmt.Println("right.right", root.right.right.value)
+		}
+	}
+
+}
+
+func main() {
+	var bst BSTree = &BinarySearchTree{}
+	bst.insert(6)
+	bst.insert(3)
+	bst.insert(7)
+	bst.insert(2)
+	bst.insert(4)
+	bst.insert(8)
+
+	fmt.Println(" binary search tree")
+	bst.PrintTree()
+}
