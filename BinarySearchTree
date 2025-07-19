@@ -4,7 +4,7 @@ import "fmt"
 
 type BSTree interface {
 	insert(val int)
-	PrintTree()
+	preorderTree(node *Node)
 }
 type Node struct {
 	right *Node
@@ -42,34 +42,13 @@ func (bst *BinarySearchTree) insert(val int) {
 		}
 	}
 }
-func (bst *BinarySearchTree) PrintTree() {
-	root := bst.root
-	if root == nil {
-		fmt.Println("tree is empty")
+func (bst *BinarySearchTree) preorderTree(node *Node) {
+	if node == nil {
 		return
 	}
-	fmt.Println("root", root.value)
-
-	if root.left != nil {
-		fmt.Println("left", root.left.value)
-
-		if root.left.left != nil {
-			fmt.Println("left.left", root.left.left.value)
-		}
-		if root.left.right != nil {
-			fmt.Println("left.right", root.left.right.value)
-		}
-	}
-	if root.right != nil {
-		fmt.Println("right", root.right.value)
-
-		if root.right.left != nil {
-			fmt.Println("right.left", root.right.left.value)
-		}
-		if root.right.right != nil {
-			fmt.Println("right.right", root.right.right.value)
-		}
-	}
+	fmt.Println(node.value)
+	bst.preorderTree(node.left)
+	bst.preorderTree(node.right)
 
 }
 
@@ -83,5 +62,5 @@ func main() {
 	bst.insert(8)
 
 	fmt.Println(" binary search tree")
-	bst.PrintTree()
+	bst.preorderTree(bst.(*BinarySearchTree).root)
 }
