@@ -1,0 +1,59 @@
+package main
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+
+	"github.com/chromedp/chromedp"
+)
+
+type Title struct {
+	Am string `json:"am"`
+}
+
+type Company struct {
+	Title Title `json:"title"`
+}
+
+type Job struct {
+	Title   Title   `json:"title"`
+	Company Company `json:"companiesStruct"`
+}
+
+func main() {
+	opts := append(chromedp.DefaultExecAllocatorOptions[:],
+		chromedp.ExecPath(`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`),
+	)
+
+	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
+	defer cancel()
+
+	ctx, cancel := chromedp.NewContext(allocCtx)
+	defer cancel()
+
+	url := "https://staff.am/am/"
+	var jobs []Job
+
+	err := chromedp.Run(ctx,
+		chromedp.Navigate(url),
+		chromedp.WaitVisible(`.job-list-item a`, chromedp.ByQuery),
+		chromedp.Evaluate(`
+			Array.from(document.querySelectorAll('.job-list-item')).map(item => {
+				const titleEl = item.querySelector('a');
+				const companyEl = item.querySelector('.company-name');
+				return {
+					title: { am: titleEl ? titleEl.innerText.trim() : "" },
+					companiesStruct: { title: { am: companyEl ? companyEl.innerText.trim() : "" } }
+				};
+			})
+		`, &jobs),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	data, _ := json.MarshalIndent(jobs, "", "  ")
+	fmt.Println(string(data))
+}
