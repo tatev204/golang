@@ -5,24 +5,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/chromedp/chromedp"
 )
 
-type Title struct {
-	Am string `json:"am"`
-}
-
-type Company struct {
-	Title Title `json:"title"`
-}
-
 type Job struct {
-	Title   Title   `json:"title"`
-	Company Company `json:"companiesStruct"`
+	Title   string `json:"title"`
+	Company string `json:"company"`
 }
 
 func main() {
+
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
 		chromedp.ExecPath(`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`),
 	)
@@ -33,21 +27,25 @@ func main() {
 	ctx, cancel := chromedp.NewContext(allocCtx)
 	defer cancel()
 
-	url := "https://staff.am/am/"
+	ctx, cancel = context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+
+	url := "https://staff.am/am/jobs"
 	var jobs []Job
 
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(url),
-		chromedp.WaitVisible(`.job-list-item a`, chromedp.ByQuery),
-		chromedp.Evaluate(`
-			Array.from(document.querySelectorAll('.job-list-item')).map(item => {
-				const titleEl = item.querySelector('a');
-				const companyEl = item.querySelector('.company-name');
-				return {
-					title: { am: titleEl ? titleEl.innerText.trim() : "" },
-					companiesStruct: { title: { am: companyEl ? companyEl.innerText.trim() : "" } }
-				};
-			})
+
+		chromedp.WaitVisible(`a[href*="/am/jobs/"]`, chromedp.ByQuery),
+
+		chromedp.EvaluateAsDevTools(`
+			Array.from(document.querySelectorAll('a[href*="/am/jobs/"]')).map(jobLink => {
+				const title = jobLink.innerText.trim();
+				const company = jobLink
+					.closest("div")
+					?.querySelector('a[href*="/am/company/"] div')?.innerText.trim() || "";
+				return { title, company };
+			});
 		`, &jobs),
 	)
 	if err != nil {
