@@ -14,7 +14,7 @@ func main() {
 	arr := input.InputArray("Array", n)
 
 	var k rune = 'k'
-	fmt.Println("enter letter k:")
+	fmt.Println(" letter k:")
 	fmt.Printf("%c\n", k)
 
 	count := input.CountNumberElementValueLessK(arr, k)
