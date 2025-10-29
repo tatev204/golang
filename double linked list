@@ -5,7 +5,7 @@ import (
 )
 
 type DLL interface {
-	insertList(val int)
+	Insert(val int)
 	PrintListMoveForward()
 	PrintListMoveBack()
 	CountofNodes() int
@@ -23,23 +23,16 @@ type DoubleLinkedList struct {
 	tail *Node
 }
 
-func (dll *DoubleLinkedList) insertList(val int) {
+func (dll *DoubleLinkedList) Insert(val int) {
+	node := &Node{value: val}
 	if dll.root == nil {
-		dll.root = &Node{value: val}
-		dll.tail = dll.root
-		fmt.Println(dll.root.value)
-		return
-
+		dll.root = node
+		dll.tail = node
+	} else {
+		dll.tail.next = node
+		node.prior = dll.tail
+		dll.tail = node
 	}
-	current := dll.root
-	for current.next != nil {
-		current = current.next
-	}
-
-	current.next = &Node{value: val}
-	current.next.prior = current
-	dll.tail = current.next
-	fmt.Println(current.next.value)
 }
 
 func (dll *DoubleLinkedList) PrintListMoveForward() {
@@ -106,8 +99,8 @@ func (dll *DoubleLinkedList) SumOddIndexes() int {
 func main() {
 	var DoubleLinkedl DLL = &DoubleLinkedList{}
 
-	DoubleLinkedl.insertList(1)
-	DoubleLinkedl.insertList(2)
+	DoubleLinkedl.Insert(1)
+	DoubleLinkedl.Insert(2)
 
 	fmt.Println("\nlist forward")
 	DoubleLinkedl.PrintListMoveForward()
